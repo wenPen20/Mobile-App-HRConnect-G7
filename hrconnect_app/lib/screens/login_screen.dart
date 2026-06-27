@@ -95,14 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                     const SizedBox(height: 20),
-                    FilledButton(
-                      onPressed: _login,
-                      child: const Text('Login'),
-                    ),
+                    FilledButton(onPressed: _login, child: const Text('Login')),
                     const SizedBox(height: 12),
                     const Text(
-                      'Try HR: hr@company.com / hr123
-Try Employee: employee@company.com / emp123',
+                      'Try HR: hr@company.com / hr123\nTry Employee: employee@company.com / emp123',
                       textAlign: TextAlign.center,
                     ),
                   ],

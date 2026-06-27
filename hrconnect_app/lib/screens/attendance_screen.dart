@@ -27,7 +27,9 @@ class AttendanceScreen extends StatelessWidget {
               itemCount: records.length,
               itemBuilder: (context, index) {
                 final record = records[index];
-                final employee = employeeService.getEmployeeById(record.employeeId);
+                final employee = employeeService.getEmployeeById(
+                  record.employeeId,
+                );
                 return Card(
                   child: ListTile(
                     leading: Icon(
@@ -35,8 +37,7 @@ class AttendanceScreen extends StatelessWidget {
                     ),
                     title: Text(employee?.fullName ?? record.employeeId),
                     subtitle: Text(
-                      '${record.date.year}-${record.date.month.toString().padLeft(2, '0')}-${record.date.day.toString().padLeft(2, '0')}
-'
+                      '${record.date.year}-${record.date.month.toString().padLeft(2, '0')}-${record.date.day.toString().padLeft(2, '0')}\n'
                       'In: ${record.checkIn} | Out: ${record.checkOut}',
                     ),
                     trailing: Text(record.status),
