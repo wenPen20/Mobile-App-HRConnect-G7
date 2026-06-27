@@ -13,7 +13,9 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final employeeService = const EmployeeService();
     final employees = employeeService.getEmployees();
-    final activeEmployees = employees.where((employee) => employee.isActive).length;
+    final activeEmployees = employees
+        .where((employee) => employee.isActive)
+        .length;
 
     return Scaffold(
       appBar: AppBar(title: const Text('HR Dashboard')),
@@ -27,30 +29,32 @@ class DashboardScreen extends StatelessWidget {
           ),
           Text('Role: ${user.role}'),
           const SizedBox(height: 16),
-          _DashboardCard(
-            icon: Icons.people,
-            title: 'Total Employees',
-            value: employees.length.toString(),
-          ),
-          _DashboardCard(
-            icon: Icons.verified_user,
-            title: 'Active Employees',
-            value: activeEmployees.toString(),
-          ),
-          _DashboardCard(
-            icon: Icons.pending_actions,
-            title: 'Pending Leave Requests',
-            value: '0',
-          ),
-          const SizedBox(height: 16),
-          FilledButton.icon(
-            onPressed: () {
-              Navigator.pushNamed(context, '/employees', arguments: user);
-            },
-            icon: const Icon(Icons.people),
-            label: const Text('Open Employee Directory'),
-          ),
-          const SizedBox(height: 8),
+          if (user.isHr) ...[
+            _DashboardCard(
+              icon: Icons.people,
+              title: 'Total Employees',
+              value: employees.length.toString(),
+            ),
+            _DashboardCard(
+              icon: Icons.verified_user,
+              title: 'Active Employees',
+              value: activeEmployees.toString(),
+            ),
+            _DashboardCard(
+              icon: Icons.pending_actions,
+              title: 'Pending Leave Requests',
+              value: '0',
+            ),
+            const SizedBox(height: 16),
+            FilledButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/employees', arguments: user);
+              },
+              icon: const Icon(Icons.people),
+              label: const Text('Open Employee Directory'),
+            ),
+            const SizedBox(height: 8),
+          ],
           FilledButton.icon(
             onPressed: () {
               Navigator.pushNamed(context, '/leave', arguments: user);
@@ -89,10 +93,7 @@ class _DashboardCard extends StatelessWidget {
       child: ListTile(
         leading: Icon(icon),
         title: Text(title),
-        trailing: Text(
-          value,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        trailing: Text(value, style: Theme.of(context).textTheme.titleLarge),
       ),
     );
   }
