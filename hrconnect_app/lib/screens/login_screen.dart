@@ -26,9 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
-    if (email.isEmpty && password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       setState(() {
-        _errorMessage = 'Email and password are required.';
+        _errorMessage = 'Both email and password are required.';
       });
       return;
     }
