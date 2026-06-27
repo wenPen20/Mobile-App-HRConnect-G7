@@ -41,11 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    Navigator.pushReplacementNamed(
-      context,
-      '/dashboard',
-      arguments: user.email,
-    );
+    Navigator.pushReplacementNamed(context, '/dashboard', arguments: user);
   }
 
   @override
