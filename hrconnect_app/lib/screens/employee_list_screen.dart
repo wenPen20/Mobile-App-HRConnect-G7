@@ -38,7 +38,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
               },
             ),
           ),
-          ListView.builder(
+          Expanded(
+            child: ListView.builder(
             itemCount: employees.length,
               itemBuilder: (context, index) {
                 final employee = employees[index];
@@ -54,6 +55,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 );
               },
             ),
+          )
         ],
       ),
     );
