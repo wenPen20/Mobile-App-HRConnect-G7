@@ -18,8 +18,12 @@ class EmployeeService {
   List<Employee> searchEmployees(String query) {
     if (query.isEmpty) return getEmployees();
 
+    final lowerQuery = query.toLowerCase();
+
     return getEmployees().where((employee) {
-      return employee.fullName.contains(query);
+      return employee.fullName.toLowerCase().contains(lowerQuery) ||
+        employee.department.toLowerCase().contains(lowerQuery) ||
+        employee.position.toLowerCase().contains(lowerQuery);
     }).toList();
   }
 }
