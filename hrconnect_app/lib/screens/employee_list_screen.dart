@@ -34,7 +34,9 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {
-                _query = value;
+                setState(() {
+                  _query = value;
+                });
               },
             ),
           ),
