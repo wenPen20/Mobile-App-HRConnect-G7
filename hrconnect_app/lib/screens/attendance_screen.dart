@@ -15,7 +15,7 @@ class AttendanceScreen extends StatelessWidget {
     final employeeService = const EmployeeService();
     final records = mockAttendance.map(Attendance.fromJson).where((record) {
       if (user.isHr) return true;
-      return record.employeeId == user.id;
+      return record.employeeId == user.employeeId;
     }).toList();
 
     return Scaffold(
