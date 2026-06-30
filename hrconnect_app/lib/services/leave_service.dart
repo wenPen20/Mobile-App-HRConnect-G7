@@ -14,7 +14,7 @@ class LeaveService {
       throw Exception('End date cannot be before start date.');
     }
 
-    if (request.totalDays < employee.leaveBalance) {
+    if (request.totalDays > employee.leaveBalance) {
       throw Exception('Not enough leave balance.');
     }
 
