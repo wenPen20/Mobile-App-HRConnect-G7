@@ -51,7 +51,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
       lastDate: DateTime(2026, 12, 31),
     );
     if (picked != null) {
-      setState(() => _startDate = picked);
+      setState(() => _endDate = picked);
     }
   }
 
@@ -86,9 +86,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
         employee: employee,
         request: request,
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
       setState(() {
         _selectedLeaveType = null;
         _startDate = null;
@@ -97,7 +97,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
       });
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.toString().replaceFirst('Exception: ', ''))),
+        SnackBar(
+          content: Text(error.toString().replaceFirst('Exception: ', '')),
+        ),
       );
     }
   }
@@ -122,7 +124,9 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
               Card(
                 child: ListTile(
                   title: Text(employee.fullName),
-                  subtitle: Text('Leave balance: ${employee.leaveBalance} days'),
+                  subtitle: Text(
+                    'Leave balance: ${employee.leaveBalance} days',
+                  ),
                 ),
               ),
             const SizedBox(height: 16),
@@ -134,16 +138,14 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
               ),
               items: leaveTypes
                   .map(
-                    (type) => DropdownMenuItem(
-                      value: type,
-                      child: Text(type),
-                    ),
+                    (type) => DropdownMenuItem(value: type, child: Text(type)),
                   )
                   .toList(),
               onChanged: (value) {
                 setState(() => _selectedLeaveType = value);
               },
-              validator: (value) => value == null ? 'Please select leave type.' : null,
+              validator: (value) =>
+                  value == null ? 'Please select leave type.' : null,
             ),
             const SizedBox(height: 12),
             OutlinedButton.icon(
