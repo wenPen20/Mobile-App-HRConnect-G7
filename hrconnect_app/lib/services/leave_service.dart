@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import '../data/mock_hr_data.dart';
 import '../models/employee.dart';
 import '../models/leave_request.dart';
 
 class LeaveService {
-  final List<LeaveRequest> _requests = [];
+  static final List<LeaveRequest> _requests = [];
+  static final ValueNotifier<int> pendingCountNotifier = ValueNotifier(0);
 
   List<LeaveRequest> get requests => List.unmodifiable(_requests);
 
@@ -30,6 +32,7 @@ class LeaveService {
     }
 
     _requests.add(request);
+    pendingCountNotifier.value = _requests.where((r) => r.status == 'Pending').length;
     return 'Leave application submitted successfully.';
   }
 }

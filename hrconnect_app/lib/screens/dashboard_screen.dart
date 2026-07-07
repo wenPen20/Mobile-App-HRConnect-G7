@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/app_user.dart';
 import '../services/employee_service.dart';
+import '../services/leave_service.dart';
 import '../widgets/custom_drawer.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -40,10 +41,15 @@ class DashboardScreen extends StatelessWidget {
               title: 'Active Employees',
               value: activeEmployees.toString(),
             ),
-            _DashboardCard(
-              icon: Icons.pending_actions,
-              title: 'Pending Leave Requests',
-              value: '0',
+            ValueListenableBuilder<int>(
+              valueListenable: LeaveService.pendingCountNotifier,
+              builder: (context, count, _) {
+                return _DashboardCard(
+                  icon: Icons.pending_actions,
+                  title: 'Pending Leave Requests',
+                  value: count.toString(),
+                );
+              },
             ),
             const SizedBox(height: 16),
             FilledButton.icon(
