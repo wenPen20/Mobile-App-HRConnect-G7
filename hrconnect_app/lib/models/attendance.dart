@@ -16,6 +16,7 @@ class Attendance {
   factory Attendance.fromJson(Map<String, dynamic> json) {
     return Attendance(
       employeeId: json['employeeId'] as String,
+      // bug3: Fixed JSON key mapping from 'dateTime' to 'date'
       date: DateTime.parse(json['date'] as String),
       checkIn: json['checkIn'] as String,
       checkOut: json['checkOut'] as String,
@@ -24,5 +25,6 @@ class Attendance {
   }
 
   bool get isLate => status.toLowerCase() == 'late';
+  // bug17: Expose a helper to easily check if the employee was absent
   bool get isAbsent => status.toLowerCase() == 'absent';
 }

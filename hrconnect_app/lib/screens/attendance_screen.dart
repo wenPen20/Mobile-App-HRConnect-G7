@@ -15,6 +15,7 @@ class AttendanceScreen extends StatelessWidget {
     final employeeService = const EmployeeService();
     final records = mockAttendance.map(Attendance.fromJson).where((record) {
       if (user.isHr) return true;
+      // bug12: Correctly filter attendance records by matching employeeId instead of user.id
       return record.employeeId == user.employeeId;
     }).toList();
 
@@ -33,6 +34,7 @@ class AttendanceScreen extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     leading: Icon(
+                      // bug17: Map attendance statuses (Late, Absent, Present) to their respective icons
                       record.isLate
                           ? Icons.warning_amber
                           : record.isAbsent
@@ -41,6 +43,7 @@ class AttendanceScreen extends StatelessWidget {
                     ),
                     title: Text(employee?.fullName ?? record.employeeId),
                     subtitle: Text(
+                      // bug1: Formatted date string with a newline escape character
                       '${record.date.year}-${record.date.month.toString().padLeft(2, '0')}-${record.date.day.toString().padLeft(2, '0')}\n'
                       'In: ${record.checkIn} | Out: ${record.checkOut}',
                     ),

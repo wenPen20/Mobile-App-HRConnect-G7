@@ -30,6 +30,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           Text('Role: ${user.role}'),
           const SizedBox(height: 16),
+          // bug5: Add check to only render HR metrics and management buttons if the user is an HR role
           if (user.isHr) ...[
             _DashboardCard(
               icon: Icons.people,
@@ -41,6 +42,7 @@ class DashboardScreen extends StatelessWidget {
               title: 'Active Employees',
               value: activeEmployees.toString(),
             ),
+            // bug16: Listen to LeaveService.pendingCountNotifier to update the pending count in real-time
             ValueListenableBuilder<int>(
               valueListenable: LeaveService.pendingCountNotifier,
               builder: (context, count, _) {

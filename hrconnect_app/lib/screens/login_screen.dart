@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
+    // bug4: Ensure both fields are provided (logical OR instead of AND check)
     if (email.isEmpty || password.isEmpty) {
       setState(() {
         _errorMessage = 'Both email and password are required.';
@@ -41,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    // bug2: Pass the logged-in User object instead of only their email to the dashboard
     Navigator.pushReplacementNamed(context, '/dashboard', arguments: user);
   }
 
@@ -93,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
                     FilledButton(onPressed: _login, child: const Text('Login')),
                     const SizedBox(height: 12),
+                    // bug1: Standardized presentation details with newline characters
                     const Text(
                       'Try HR: hr@company.com / hr123\nTry Employee: employee@company.com / emp123',
                       textAlign: TextAlign.center,

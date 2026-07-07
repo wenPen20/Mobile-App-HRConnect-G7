@@ -35,6 +35,7 @@ class EmployeeDetailScreen extends StatelessWidget {
           _InfoTile(label: 'Staff ID', value: employee.id),
           _InfoTile(label: 'Department', value: employee.department),
           _InfoTile(label: 'Email', value: employee.email),
+          // bug11: Display the correct employee.phone instead of duplicates of employee.email
           _InfoTile(label: 'Phone', value: employee.phone),
           _InfoTile(label: 'Manager', value: employee.managerName),
           _InfoTile(label: 'Leave Balance', value: '${employee.leaveBalance} days'),

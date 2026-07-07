@@ -34,12 +34,14 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {
+                // bug8: Re-trigger build (setState) on query change to filter search list
                 setState(() {
                   _query = value;
                 });
               },
             ),
           ),
+          // bug6: Wrap ListView.builder in Expanded so it layouts correctly inside a Column
           Expanded(
             child: ListView.builder(
             itemCount: employees.length,
@@ -48,6 +50,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 return EmployeeCard(
                   employee: employee,
                   onTap: () {
+                    // bug7: Fixed routing name to '/employee-details' and passed the whole employee object instead of just the ID
                     Navigator.pushNamed(
                       context,
                       '/employee-details',

@@ -22,6 +22,7 @@ class Employee {
   });
 
   factory Employee.fromJson(Map<String, dynamic> json) {
+    // bug3: Corrected employee JSON keys mapping (e.g. name to fullName, leave_balance to leaveBalance) and added null safety fallback for phone numbers
     return Employee(
       id: json['id'] as String,
       fullName: json['fullName'] as String,

@@ -15,5 +15,6 @@ class LeaveRequest {
     this.status = 'Pending',
   });
 
+  // bug15: Added +1 to calculate inclusive total days (e.g. same day is 1 day leave)
   int get totalDays => endDate.difference(startDate).inDays + 1;
 }

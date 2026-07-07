@@ -18,6 +18,7 @@ class EmployeeService {
   List<Employee> searchEmployees(String query) {
     if (query.isEmpty) return getEmployees();
 
+    // bug9: Perform case-insensitive multi-field search (checks fullName, department, and position)
     final lowerQuery = query.toLowerCase();
 
     return getEmployees().where((employee) {

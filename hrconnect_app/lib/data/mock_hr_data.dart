@@ -17,6 +17,7 @@ const List<Map<String, dynamic>> mockUsers = [
   },
 ];
 
+// bug15: Removed 'const' modifier to make mockEmployees list mutable so employee leave balance can be updated in memory
 List<Map<String, dynamic>> mockEmployees = [
   {
     'id': 'E001',

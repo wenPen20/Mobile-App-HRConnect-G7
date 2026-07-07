@@ -37,6 +37,7 @@ class CustomDrawer extends StatelessWidget {
               title: const Text('Employees'),
               onTap: () {
                 Navigator.pop(context);
+                // bug10: Fixed wrong route name from '/employee' to '/employees'
                 Navigator.pushNamed(context, '/employees', arguments: user);
               },
             ),
