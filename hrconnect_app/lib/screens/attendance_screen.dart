@@ -33,7 +33,11 @@ class AttendanceScreen extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     leading: Icon(
-                      record.isLate ? Icons.warning_amber : Icons.check_circle,
+                      record.isLate
+                          ? Icons.warning_amber
+                          : record.isAbsent
+                              ? Icons.cancel_outlined
+                              : Icons.check_circle,
                     ),
                     title: Text(employee?.fullName ?? record.employeeId),
                     subtitle: Text(

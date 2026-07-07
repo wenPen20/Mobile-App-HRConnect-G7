@@ -24,4 +24,5 @@ class Attendance {
   }
 
   bool get isLate => status.toLowerCase() == 'late';
+  bool get isAbsent => status.toLowerCase() == 'absent';
 }
